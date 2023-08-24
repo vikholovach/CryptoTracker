@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3605472D2A97A12500E23947 /* UIColor+HexExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3605472C2A97A12500E23947 /* UIColor+HexExtension.swift */; };
+		36118B182A97A24B0075BE9F /* UIsearchBar+TintColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36118B172A97A24B0075BE9F /* UIsearchBar+TintColorExtension.swift */; };
+		36118B1C2A97AE650075BE9F /* RatesViewController+UISearchBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36118B1B2A97AE650075BE9F /* RatesViewController+UISearchBarExtension.swift */; };
 		3655D9712A9647CA00702DEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3655D9702A9647CA00702DEB /* AppDelegate.swift */; };
 		3655D9732A9647CA00702DEB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3655D9722A9647CA00702DEB /* SceneDelegate.swift */; };
 		3655D97A2A9647CD00702DEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3655D9792A9647CD00702DEB /* Assets.xcassets */; };
@@ -43,6 +45,8 @@
 
 /* Begin PBXFileReference section */
 		3605472C2A97A12500E23947 /* UIColor+HexExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+HexExtension.swift"; sourceTree = "<group>"; };
+		36118B172A97A24B0075BE9F /* UIsearchBar+TintColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIsearchBar+TintColorExtension.swift"; sourceTree = "<group>"; };
+		36118B1B2A97AE650075BE9F /* RatesViewController+UISearchBarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RatesViewController+UISearchBarExtension.swift"; sourceTree = "<group>"; };
 		3655D96D2A9647CA00702DEB /* CryptoRate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptoRate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3655D9702A9647CA00702DEB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3655D9722A9647CA00702DEB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				3605472C2A97A12500E23947 /* UIColor+HexExtension.swift */,
+				36118B172A97A24B0075BE9F /* UIsearchBar+TintColorExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -119,9 +124,9 @@
 		3655D96F2A9647CA00702DEB /* CryptoRate */ = {
 			isa = PBXGroup;
 			children = (
-				3605472B2A97A10B00E23947 /* Extensions */,
 				36D6F68D2A964B32002CFCC4 /* PresentationLayer */,
 				36D6F6832A964877002CFCC4 /* Modules */,
+				3605472B2A97A10B00E23947 /* Extensions */,
 				3655D9702A9647CA00702DEB /* AppDelegate.swift */,
 				3655D9722A9647CA00702DEB /* SceneDelegate.swift */,
 				3655D9792A9647CD00702DEB /* Assets.xcassets */,
@@ -203,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				36D6F6852A964895002CFCC4 /* RatesViewController.swift */,
+				36118B1B2A97AE650075BE9F /* RatesViewController+UISearchBarExtension.swift */,
 				36D6F6862A964895002CFCC4 /* RatesViewController.xib */,
 			);
 			path = View;
@@ -351,8 +357,10 @@
 			files = (
 				36D6F6912A965174002CFCC4 /* CoinModel.swift in Sources */,
 				3655D9712A9647CA00702DEB /* AppDelegate.swift in Sources */,
+				36118B1C2A97AE650075BE9F /* RatesViewController+UISearchBarExtension.swift in Sources */,
 				36D6F6972A965464002CFCC4 /* CoinViewPresenter.swift in Sources */,
 				36D6F6872A964895002CFCC4 /* RatesViewController.swift in Sources */,
+				36118B182A97A24B0075BE9F /* UIsearchBar+TintColorExtension.swift in Sources */,
 				36D6F6992A9654E7002CFCC4 /* NetworkService.swift in Sources */,
 				3655D9732A9647CA00702DEB /* SceneDelegate.swift in Sources */,
 				36D6F69E2A978128002CFCC4 /* CoinTableViewCell.swift in Sources */,

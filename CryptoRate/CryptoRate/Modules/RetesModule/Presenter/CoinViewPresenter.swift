@@ -68,6 +68,7 @@ class CoinPresenter: CoinViewPresenterProtocol {
     private func setupPublisher() {
         self.coinsArray
             .removeDuplicates()
+            .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: { completion in
                     print("completion status: \(completion)")

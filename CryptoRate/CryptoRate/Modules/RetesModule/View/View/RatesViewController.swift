@@ -14,37 +14,24 @@ class RatesViewController: UIViewController {
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var tableView: UITableView!
     
-    
     //MARK: - Data source
     private var dataSource: UITableViewDiffableDataSource<Sections, CryptoData>?
-    
     private var coins = [CryptoData]()
     private var filteredCoins = [CryptoData]()
     
-    var presenter: CoinViewPresenterProtocol!
-        
+    //Combine props
     private var cancellables: Set<AnyCancellable> = []
-    private var searchTextSubject = PassthroughSubject<String, Never>()
+    var searchTextSubject = PassthroughSubject<String, Never>()
     
+    //presenter
+    var presenter: CoinViewPresenterProtocol!
     
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         setSearchBar()
-        
-        searchTextSubject
-            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
-            .removeDuplicates()
-            .sink { [weak self] searchText in
-                guard let self = self else { return }
-                self.filteredItems = searchText.isEmpty
-                ? self.items
-                : self.items.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
-                self.reloadData(with: filteredItems)
-            }
-            .store(in: &cancellables)
-        
+        setupSearchPublisher()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,13 +40,31 @@ class RatesViewController: UIViewController {
     }
     
     //MARK: - Methods
+    private func setupSearchPublisher() {
+        searchTextSubject
+            .receive(on: DispatchQueue.main)
+            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
+            .removeDuplicates()
+            .sink { [weak self] searchText in
+                guard let self = self else { return }
+                //if filtered array isEmpty -> we will show updated coins
+                self.filteredCoins = searchText.isEmpty
+                ? self.coins
+                : self.coins.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+                self.reloadData(with: filteredCoins)
+            }
+            .store(in: &cancellables)
+    }
+    
     private func setSearchBar() {
         self.searchBar.setPlaceholder(with: "Search", and: UIColor(hex: "FCFCFD"))
         self.searchBar.delegate = self
+        self.searchBar.searchTextField.clearButtonMode = .never
     }
     
     private func setupTableView() {
         self.tableView.register(UINib(nibName: "CoinTableViewCell", bundle: nil), forCellReuseIdentifier: "CoinTableViewCell")
+        self.tableView.keyboardDismissMode = .onDrag
         initDataSource()
     }
     
@@ -91,6 +96,7 @@ extension RatesViewController: CoinViewProtocol {
         self.reloadData(with: coins)
     }
     
+    //in case of error while retrieving data -> show allert
     func onError(with error: Error) {
         let alert = UIAlertController(
             title: error.localizedDescription,
@@ -104,13 +110,3 @@ extension RatesViewController: CoinViewProtocol {
     }
 }
 
-extension RatesViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchTextSubject.send(searchText)
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = ""
-        searchTextSubject.send("")
-    }
-}

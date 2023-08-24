@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RatesViewController" customModule="CryptoRate" customModuleProvider="target">
+            <connections>
+                <outlet property="searchBar" destination="ETY-OD-JcP" id="ltr-s3-rHm"/>
+                <outlet property="tableView" destination="6iz-gX-FPb" id="Rom-Cy-wzM"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6iz-gX-FPb">
+                    <rect key="frame" x="0.0" y="203.66666666666669" width="393" height="648.33333333333326"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m1U-3Z-gFK">
+                    <rect key="frame" x="24" y="75" width="60" height="27.666666666666671"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
+                    <color key="textColor" red="0.9882352941176471" green="0.9882352941176471" blue="0.99215686274509807" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cso-Pa-GIL">
+                    <rect key="frame" x="0.0" y="187" width="393" height="0.66666666666665719"/>
+                    <color key="backgroundColor" red="0.9882352941176471" green="0.9882352941176471" blue="0.99215686274509807" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="Zkm-ZY-0LD"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ArH-H2-rjy">
+                    <rect key="frame" x="337" y="75" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="ArH-H2-rjy" secondAttribute="height" multiplier="1:1" id="VN7-YR-2tq"/>
+                        <constraint firstAttribute="height" constant="40" id="ZC8-Qn-KQO"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" backgroundImage="notifications"/>
+                </button>
+                <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ETY-OD-JcP">
+                    <rect key="frame" x="8" y="123" width="377" height="56"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="8SN-YR-jqd"/>
+                    </connections>
+                </searchBar>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" red="0.062745098039215685" green="0.094117647058823528" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstItem="Cso-Pa-GIL" firstAttribute="top" secondItem="ETY-OD-JcP" secondAttribute="bottom" constant="8" id="3rm-Rp-S8G"/>
+                <constraint firstItem="m1U-3Z-gFK" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="9wz-0l-1v1"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="6iz-gX-FPb" secondAttribute="trailing" id="GDg-ti-DGq"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ArH-H2-rjy" secondAttribute="trailing" constant="16" id="GaF-1O-xup"/>
+                <constraint firstItem="m1U-3Z-gFK" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="Qbr-Ty-OMn"/>
+                <constraint firstItem="ETY-OD-JcP" firstAttribute="top" secondItem="ArH-H2-rjy" secondAttribute="bottom" constant="8" id="Ukv-Rr-peD"/>
+                <constraint firstItem="ArH-H2-rjy" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="Xux-SN-qXi"/>
+                <constraint firstItem="6iz-gX-FPb" firstAttribute="top" secondItem="Cso-Pa-GIL" secondAttribute="bottom" constant="16" id="f67-FM-dRu"/>
+                <constraint firstAttribute="bottom" secondItem="6iz-gX-FPb" secondAttribute="bottom" id="hSD-08-3kw"/>
+                <constraint firstItem="Cso-Pa-GIL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="hue-Aw-7Kq"/>
+                <constraint firstAttribute="trailing" secondItem="ETY-OD-JcP" secondAttribute="trailing" constant="8" id="ii5-Cd-UMC"/>
+                <constraint firstItem="6iz-gX-FPb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="n8p-13-uL9"/>
+                <constraint firstItem="ETY-OD-JcP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="tpQ-DG-sbj"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Cso-Pa-GIL" secondAttribute="trailing" id="zUf-eP-4Pm"/>
+            </constraints>
+            <point key="canvasLocation" x="127.48091603053435" y="-11.267605633802818"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="notifications" width="44" height="44"/>
+    </resources>
+</document>

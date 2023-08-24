@@ -14,17 +14,37 @@ class RatesViewController: UIViewController {
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var tableView: UITableView!
     
-    var presenter: CoinViewPresenterProtocol!
-    private var previousPrice = 0.0
     
     //MARK: - Data source
     private var dataSource: UITableViewDiffableDataSource<Sections, CryptoData>?
+    
+    private var coins = [CryptoData]()
+    private var filteredCoins = [CryptoData]()
+    
+    var presenter: CoinViewPresenterProtocol!
+        
+    private var cancellables: Set<AnyCancellable> = []
+    private var searchTextSubject = PassthroughSubject<String, Never>()
+    
     
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-        setupSearchBar()
+        setSearchBar()
+        
+        searchTextSubject
+            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
+            .removeDuplicates()
+            .sink { [weak self] searchText in
+                guard let self = self else { return }
+                self.filteredItems = searchText.isEmpty
+                ? self.items
+                : self.items.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+                self.reloadData(with: filteredItems)
+            }
+            .store(in: &cancellables)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,18 +53,9 @@ class RatesViewController: UIViewController {
     }
     
     //MARK: - Methods
-    private func setupSearchBar() {
-        let placeholder = "Search"
-        let placeholderAttributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.red // Your desired color
-        ]
-        
-        if let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField {
-            textFieldInsideSearchBar.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: placeholderAttributes)
-            if let leftView = textFieldInsideSearchBar.leftView as? UIImageView {
-                leftView.tintColor = UIColor.blue // Your desired color
-            }
-        }
+    private func setSearchBar() {
+        self.searchBar.setPlaceholder(with: "Search", and: UIColor(hex: "FCFCFD"))
+        self.searchBar.delegate = self
     }
     
     private func setupTableView() {
@@ -76,6 +87,7 @@ class RatesViewController: UIViewController {
 
 extension RatesViewController: CoinViewProtocol {
     func onContentUpdate(with coins: [CryptoData]) {
+        self.coins = coins
         self.reloadData(with: coins)
     }
     
@@ -89,5 +101,16 @@ extension RatesViewController: CoinViewProtocol {
             style: .cancel))
         self.present(alert, animated: true)
         
+    }
+}
+
+extension RatesViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchTextSubject.send(searchText)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchTextSubject.send("")
     }
 }
